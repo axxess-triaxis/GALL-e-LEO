@@ -1,0 +1,24 @@
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Generated scenario data and run outputs -- large, and fully reproducible
+# from the documented seed + make_scenario.py command in docs/EXPERIMENTS.md.
+# The small score_report.json for every run is preserved in docs/results/
+# instead of committing the full multi-MB decisions.csv/scenario CSVs.
+scenarios/comp-*
+results/
+run_output*/
+run_baseline_comp/
+run_ref_comp/
+
+# Local env
+.env
