@@ -15,8 +15,11 @@ venv/
 # The small score_report.json for every run is preserved in docs/results/
 # instead of committing the full multi-MB decisions.csv/scenario CSVs.
 scenarios/comp-*
+scenarios/sweep-*
 results/
+sweep_results/
 run_output*/
+run_unified_dev/
 run_baseline_comp/
 run_ref_comp/
 
