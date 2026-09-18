@@ -235,14 +235,110 @@ enabled, making seed101 a clean isolation test for item ③ (region-shortfall)
 alone. `comp-seed202` has exactly 1 request, giving item ② a small amount of
 signal to act on.
 
+## Run 10-11 — a fourth variant: unified marginal-value scorer
+
+**Question**: `reference_strategy.py`'s items ①-④ are a priority *cascade* —
+whichever check fires first wins outright, silencing every other
+consideration for that turn. Runs 4-9 showed this is exactly why it's
+inconsistent: on seed101 the coverage-evenness step fired without ever being
+weighed against the immediate science-per-second value already on offer, and
+lost -2.40%. Does replacing the cascade with a single combined score per
+candidate (add every term, take the argmax, so nothing can be silently
+overridden) do better?
+
+`agent_unified/my_strategy.py` implements this: same point values, same
+helper functions as `reference_strategy.py` (`remaining_chances`,
+`region_shortfall`, `expiring_requests`, `coverage_weight`,
+`_evenness_gain`), but the required-tile and region-shortfall risk terms are
+now continuous in chances-remaining (not a hard `LAST_CHANCES=2` cutoff), and
+every term is summed into one score instead of gated behind sequential
+`if`/`return` checks.
+
+```
+python3 local_runner.py --scenario scenarios/comp-seed101 --agent agent_unified/minimal_agent.py --wallclock 3600 --out results/seed101_unified
+python3 local_runner.py --scenario scenarios/comp-seed202 --agent agent_unified/minimal_agent.py --wallclock 3600 --out results/seed202_unified
+```
+
+| Seed | Variant | total | required_missing | vs. baseline |
+|---|---|---|---|---|
+| 101 | Unified | 71571.801704 | 0 | -2.41% (statistically tied with Full/Reference) |
+| 202 | Unified | 75300.359558 | 1 | **+0.78%** (best of all four variants; same miss avoided as Full) |
+
+**Result**: on these two seeds, Unified matches the best cascade variant
+(seed101) and slightly beats every variant including Full (seed202). Enough
+to justify testing it across many more seeds rather than dismissing it —
+which is Run 12.
+
+## Run 12 — 10-seed sweep, all four variants, fresh seeds
+
+**Question**: docs' own standing conclusion since Run 9 was "don't submit any
+variant on the strength of a single seed's result... aim for at least 8-10
+before trusting a percentage." This is that test. 10 fresh seeds (301-310,
+none reused from 42/101/202), same `comp-seed101`/`comp-seed202` shape (10
+nights, 8 regions, 200 tiles/region, `coverage_bonus_weight` patched to
+0.35), all four variants (baseline, reference, full, unified) run on every
+seed — 40 real runs total.
+
+```
+python3 scripts/seed_sweep.py --seeds 301-310 --concurrency 6
+```
+
+Full per-run data: `scripts/seed_sweep_results.json` (generated from the real
+`score_report.json` of every one of the 40 runs, not hand-entered).
+
+| Variant | mean | stdev | min | max | seeds won (of 10) |
+|---|---|---|---|---|---|
+| **Baseline** | 82035.93 | 13194.31 | 64939.76 | 100570.37 | **7** |
+| Reference | 81719.93 | 13024.66 | 64772.54 | 100382.21 | 1 |
+| Full | 81741.01 | 13022.56 | 64759.46 | 100330.75 | 1 |
+| Unified | 81712.95 | 13033.44 | 64822.92 | 100287.24 | 1 |
+
+Per-seed winner and margin over baseline:
+
+| Seed | Winner | vs. baseline |
+|---|---|---|
+| 301 | Baseline | — |
+| 302 | Baseline | — |
+| 303 | Baseline | — |
+| 304 | Reference | +0.17% |
+| 305 | Baseline | — |
+| 306 | Baseline | — |
+| 307 | Baseline | — |
+| 308 | Baseline | — |
+| 309 | Unified | +0.08% |
+| 310 | Full | +0.30% |
+
+### This settles it, at least for now
+
+**Baseline — trust the platform's own `estimated_gain_per_second` ranking,
+with zero local reasoning — wins outright on 7 of 10 fresh seeds.** On the 3
+seeds it loses, the winning margin is small: +0.08% to +0.30%. Combined with
+Runs 3-9 (baseline lost clearly only on seed42's `comp-scale`, +0.41% to
+reference; won clearly on seed101, -2.4% to every other variant), the honest
+read across all 13 seeds tested in this repo (42, 101, 202, 301-310) is:
+
+1. **No cascade or unified-scoring variant beats baseline consistently
+   enough to justify the added complexity and risk.** The coverage-evenness
+   logic's downside (seed101: -2.4%) is larger than its upside anywhere
+   measured (best case +0.41%, seed42).
+2. **The unified scorer does not fix the underlying problem.** Combining
+   terms additively instead of cascading them removes the "one veto
+   silences everything" failure mode, but the terms it's combining
+   (coverage-evenness chief among them) are themselves not reliably
+   profitable — so a more principled combination of unprofitable signals is
+   still not profitable.
+3. **Updated recommendation for submission**: baseline is the safer default
+   given the real competition's seed is unknown and baseline had the
+   smallest downside of any variant across every seed tested. This reverses
+   the framing after Run 3 alone ("reference beats baseline") and confirms
+   the framing after Runs 4-9 ("baseline is genuinely competitive") with
+   7x the sample size.
+
 ## Open questions this log will keep tracking
 
-- Does the "Full" variant beat "Reference" on either seed, contradicting the
-  kit's own disabled-by-default choice? (In progress — Runs 4-9.)
-- Across however many seeds get tested, what's the actual distribution of
-  the reference strategy's improvement over baseline — is +0.41% (Run 3)
-  typical, or was that scenario unusually unfavorable to it?
-- Not yet tested: `LAST_CHANCES` threshold sensitivity (currently 2, hardcoded
-  in `reference_strategy.py`).
+- `LAST_CHANCES` threshold sensitivity (currently 2, hardcoded in
+  `reference_strategy.py`; continuous in `agent_unified`) — not yet swept.
+- Whether an even larger sample (20-30 seeds) shifts baseline's 7/10 win
+  rate meaningfully, or whether that's already a stable estimate.
 - Not yet done: registration on the competition platform itself (requires
   the founder's own account — see SKILL.md's `sac_submit.py` usage).

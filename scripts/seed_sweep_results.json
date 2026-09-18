@@ -1,0 +1,242 @@
+[
+  {
+    "seed": 301,
+    "variant": "agent_baseline",
+    "total": 64939.760652,
+    "required_missing": 0
+  },
+  {
+    "seed": 301,
+    "variant": "agent_ref",
+    "total": 64772.543474,
+    "required_missing": 0
+  },
+  {
+    "seed": 301,
+    "variant": "agent_full",
+    "total": 64759.462416,
+    "required_missing": 0
+  },
+  {
+    "seed": 301,
+    "variant": "agent_unified",
+    "total": 64822.923356,
+    "required_missing": 0
+  },
+  {
+    "seed": 302,
+    "variant": "agent_baseline",
+    "total": 81517.617147,
+    "required_missing": 0
+  },
+  {
+    "seed": 302,
+    "variant": "agent_ref",
+    "total": 80700.397586,
+    "required_missing": 0
+  },
+  {
+    "seed": 302,
+    "variant": "agent_full",
+    "total": 80700.397586,
+    "required_missing": 0
+  },
+  {
+    "seed": 302,
+    "variant": "agent_unified",
+    "total": 80670.218374,
+    "required_missing": 0
+  },
+  {
+    "seed": 303,
+    "variant": "agent_baseline",
+    "total": 99419.66438,
+    "required_missing": 0
+  },
+  {
+    "seed": 303,
+    "variant": "agent_ref",
+    "total": 98624.208401,
+    "required_missing": 0
+  },
+  {
+    "seed": 303,
+    "variant": "agent_full",
+    "total": 98395.020757,
+    "required_missing": 0
+  },
+  {
+    "seed": 303,
+    "variant": "agent_unified",
+    "total": 98536.99001,
+    "required_missing": 0
+  },
+  {
+    "seed": 304,
+    "variant": "agent_baseline",
+    "total": 69388.636439,
+    "required_missing": 0
+  },
+  {
+    "seed": 304,
+    "variant": "agent_ref",
+    "total": 69506.891327,
+    "required_missing": 0
+  },
+  {
+    "seed": 304,
+    "variant": "agent_full",
+    "total": 69428.360548,
+    "required_missing": 0
+  },
+  {
+    "seed": 304,
+    "variant": "agent_unified",
+    "total": 69343.649654,
+    "required_missing": 0
+  },
+  {
+    "seed": 305,
+    "variant": "agent_baseline",
+    "total": 86344.381293,
+    "required_missing": 0
+  },
+  {
+    "seed": 305,
+    "variant": "agent_ref",
+    "total": 85354.372272,
+    "required_missing": 0
+  },
+  {
+    "seed": 305,
+    "variant": "agent_full",
+    "total": 85667.523784,
+    "required_missing": 0
+  },
+  {
+    "seed": 305,
+    "variant": "agent_unified",
+    "total": 85370.882873,
+    "required_missing": 0
+  },
+  {
+    "seed": 306,
+    "variant": "agent_baseline",
+    "total": 95558.062245,
+    "required_missing": 0
+  },
+  {
+    "seed": 306,
+    "variant": "agent_ref",
+    "total": 95303.137728,
+    "required_missing": 0
+  },
+  {
+    "seed": 306,
+    "variant": "agent_full",
+    "total": 95517.017489,
+    "required_missing": 0
+  },
+  {
+    "seed": 306,
+    "variant": "agent_unified",
+    "total": 95511.900956,
+    "required_missing": 0
+  },
+  {
+    "seed": 307,
+    "variant": "agent_baseline",
+    "total": 67357.62972,
+    "required_missing": 0
+  },
+  {
+    "seed": 307,
+    "variant": "agent_ref",
+    "total": 67090.597392,
+    "required_missing": 0
+  },
+  {
+    "seed": 307,
+    "variant": "agent_full",
+    "total": 67136.460977,
+    "required_missing": 0
+  },
+  {
+    "seed": 307,
+    "variant": "agent_unified",
+    "total": 67092.436339,
+    "required_missing": 0
+  },
+  {
+    "seed": 308,
+    "variant": "agent_baseline",
+    "total": 100570.372662,
+    "required_missing": 0
+  },
+  {
+    "seed": 308,
+    "variant": "agent_ref",
+    "total": 100382.211042,
+    "required_missing": 0
+  },
+  {
+    "seed": 308,
+    "variant": "agent_full",
+    "total": 100330.75305,
+    "required_missing": 0
+  },
+  {
+    "seed": 308,
+    "variant": "agent_unified",
+    "total": 100287.242565,
+    "required_missing": 0
+  },
+  {
+    "seed": 309,
+    "variant": "agent_baseline",
+    "total": 80173.92004,
+    "required_missing": 0
+  },
+  {
+    "seed": 309,
+    "variant": "agent_ref",
+    "total": 80161.332554,
+    "required_missing": 0
+  },
+  {
+    "seed": 309,
+    "variant": "agent_full",
+    "total": 80161.332554,
+    "required_missing": 0
+  },
+  {
+    "seed": 309,
+    "variant": "agent_unified",
+    "total": 80237.365096,
+    "required_missing": 0
+  },
+  {
+    "seed": 310,
+    "variant": "agent_baseline",
+    "total": 75089.245794,
+    "required_missing": 0
+  },
+  {
+    "seed": 310,
+    "variant": "agent_ref",
+    "total": 75303.655317,
+    "required_missing": 0
+  },
+  {
+    "seed": 310,
+    "variant": "agent_full",
+    "total": 75313.819466,
+    "required_missing": 0
+  },
+  {
+    "seed": 310,
+    "variant": "agent_unified",
+    "total": 75255.902139,
+    "required_missing": 0
+  }
+]
