@@ -9,6 +9,11 @@ its own documentation. All local strategy testing and results are logged in
 actually been tried and what won/lost, before this file's own quick-start
 instructions.
 
+Triaxis Ventures' own work here is the strategy experiments in
+[docs/EXPERIMENTS.md](docs/EXPERIMENTS.md) and their score reports in
+[docs/results/](docs/results/). It is a hackathon build, separate from the Triaxis product stack
+(see the [founder profile](https://github.com/axxess-triaxis)).
+
 ---
 
 # Agent Observer — starter kit (challenge v3)
